@@ -1,0 +1,58 @@
+{
+  "title": {
+    "fr": "§6§lÊtes-vous premium ?"
+  },
+  "type": "GENERIC_9X1",
+  "reservedSlots": [],
+  "placeholderItem": {
+    "itemType": "GRAY_STAINED_GLASS_PANE",
+    "displayName": {"fr": "§0"},
+    "lore": [],
+    "amount": 1,
+    "slots": [0, 1, 3, 4, 5, 7, 8]
+  },
+  "items": [
+    {
+      "itemType": "GREEN_WOOL",
+      "displayName": {
+        "fr": "§a§lOUI"
+      },
+      "lore": {
+        "fr": [
+          "§7Mon compte sera définit comme",
+          "§apremium §7et je pourrais me",
+          "§7connecter directement au serveur."
+        ]
+      },
+      "amount": 1,
+      "actionHandler": "choose",
+      "actionArguments": [
+        "premium"
+      ],
+      "slots": [
+        2
+      ]
+    },
+    {
+      "itemType": "RED_WOOL",
+      "displayName": {
+        "fr": "§c§lNON"
+      },
+      "lore": {
+        "fr": [
+          "§7Mon compte sera définit comme",
+          "§ccracké §7et je devrais me connecter",
+          "§7avec un mot de passe ou avec §9Discord§7."
+        ]
+      },
+      "amount": 1,
+      "actionHandler": "choose",
+      "actionArguments": [
+        "cracked"
+      ],
+      "slots": [
+        6
+      ]
+    }
+  ]
+}

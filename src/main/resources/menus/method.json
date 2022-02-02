@@ -1,0 +1,58 @@
+{
+  "title": {
+    "fr": "§6§lMéthode de connexion"
+  },
+  "type": "GENERIC_9X1",
+  "reservedSlots": [],
+  "placeholderItem": {
+    "itemType": "GRAY_STAINED_GLASS_PANE",
+    "displayName": {"fr": "§0"},
+    "lore": [],
+    "amount": 1,
+    "slots": [0, 1, 3, 4, 5, 7, 8]
+  },
+  "items": [
+    {
+      "itemType": "BLUE_WOOL",
+      "displayName": {
+        "fr": "§3§lDiscord"
+      },
+      "lore": {
+        "fr": [
+          "§7Vous utiliserez votre compte discord pour",
+          "§7vous connecter.",
+          "§r» §6Changement de pseudo §apossible"
+        ]
+      },
+      "amount": 1,
+      "actionHandler": "method",
+      "actionArguments": [
+        "discord"
+      ],
+      "slots": [
+        2
+      ]
+    },
+    {
+      "itemType": "YELLOW_WOOL",
+      "displayName": {
+        "fr": "§e§lMOT DE PASSE"
+      },
+      "lore": {
+        "fr": [
+          "§7Vous utiliserez un mot de passe",
+          "§7vous connecter.",
+          "§r» §6Changement de pseudo §cimpossible"
+        ]
+      },
+      "amount": 1,
+      "actionHandler": "method",
+      "actionArguments": [
+        "password"
+      ],
+      "slots": [
+        6
+      ]
+    }
+  ]
+}

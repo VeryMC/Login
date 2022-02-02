@@ -1,0 +1,45 @@
+{
+  "bold": true,
+  "color": "gold",
+  "extra": [
+    {
+      "bold": true,
+      "color": "white",
+      "text": "» "
+    },
+    {
+      "bold": true,
+      "color": "dark_aqua",
+      "clickEvent": {
+        "action": "run_command",
+        "value": "/log premium"
+      },
+      "hoverEvent": {
+        "action": "show_text",
+        "contents": {
+          "text": "§3§lDiscord\n§7Je devrais ouvrir mon navigateur et ouvrir un lien pour me connecter.\n§aChangement de pseudo possible"
+        }
+      },
+      "text": "DISCORD"
+    },
+    {
+      "text": " "
+    },
+    {
+      "bold": true,
+      "color": "dark_gray",
+      "clickEvent": {
+        "action": "run_command",
+        "value": "/log crack"
+      },
+      "hoverEvent": {
+        "action": "show_text",
+        "contents": {
+          "text": "§8§lMOT DE PASSE\n§7Je devrais utiliser un mot de passe pour me connecter.\n§cChangement de pseudo impossible"
+        }
+      },
+      "text": "MOT DE PASSE"
+    }
+  ],
+  "text": "Login "
+}

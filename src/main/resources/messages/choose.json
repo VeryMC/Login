@@ -1,0 +1,45 @@
+{
+  "bold": true,
+  "color": "gold",
+  "extra": [
+    {
+      "bold": true,
+      "color": "white",
+      "text": "» "
+    },
+    {
+      "bold": true,
+      "color": "blue",
+      "clickEvent": {
+        "action": "run_command",
+        "value": "/log premium"
+      },
+      "hoverEvent": {
+        "action": "show_text",
+        "contents": {
+          "text": "§a§lJe suis premium\n§7Je pourrais me connecter directement, changer de pseudo, avoir mon skin."
+        }
+      },
+      "text": "PREMIUM"
+    },
+    {
+      "text": " "
+    },
+    {
+      "bold": true,
+      "color": "red",
+      "clickEvent": {
+        "action": "run_command",
+        "value": "/log crack"
+      },
+      "hoverEvent": {
+        "action": "show_text",
+        "contents": {
+          "text": "§c§lJe suis cracké\n§7Je devrais me connecter avec discord ou un mot de passe."
+        }
+      },
+      "text": "CRACK"
+    }
+  ],
+  "text": "Login "
+}
