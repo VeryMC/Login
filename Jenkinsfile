@@ -12,11 +12,10 @@ pipeline {
         sh 'mvn -B -DskipTests clean install'
       }
     }
-
-    post {
+  }
+  post {
         always {
             archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
         }
     }
-  }
 }
