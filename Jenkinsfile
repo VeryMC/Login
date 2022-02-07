@@ -2,7 +2,7 @@ pipeline {
   agent {
     docker {
       args '-v /root/.m2:/root/.m2'
-      image 'maven:3.8.4-eclipse-temurin-16'
+      image 'docker.premsiserv.com/verymc/maven:3.8.4-eclipse-temurin-16'
     }
 
   }
@@ -12,10 +12,12 @@ pipeline {
         sh 'mvn -B -DskipTests clean install'
       }
     }
+
   }
   post {
-        always {
-            archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-        }
+    always {
+      archiveArtifacts(artifacts: 'target/*.jar', fingerprint: true)
     }
+
+  }
 }
