@@ -1,0 +1,16 @@
+{
+  "bold": true,
+  "color": "gold",
+  "extra": [
+    {
+      "bold": true,
+      "color": "white",
+      "text": "» "
+    },
+    {
+      "color": "yellow",
+      "text": "Veuillez-vous reconnecter pour finaliser votre inscription."
+    }
+  ],
+  "text": "Login\n"
+}

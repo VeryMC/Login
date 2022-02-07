@@ -1,0 +1,48 @@
+package fr.verymc.login;
+
+import com.velocitypowered.api.proxy.Player;
+import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.proxy.server.RegisteredServer;
+import com.velocitypowered.api.util.GameProfile;
+
+import java.lang.reflect.Field;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class ReflectManager {
+
+    public Player changeUUID(Player player, UUID newUUID) throws NoSuchFieldException, IllegalAccessException {
+        final Class<?> playerClass = player.getClass();
+
+        final Field gameProfileField = playerClass.getDeclaredField("profile");
+        gameProfileField.setAccessible(true);
+
+        final GameProfile gameProfile = (GameProfile) gameProfileField.get(player);
+
+        final GameProfile newGameProfile = new GameProfile(newUUID, gameProfile.getName(), gameProfile.getProperties());
+        gameProfileField.set(player, newGameProfile);
+
+        gameProfileField.setAccessible(false);
+
+        return player;
+    }
+
+    public void removePlayer(UUID player, RegisteredServer server, ProxyServer proxy) throws NoSuchFieldException, IllegalAccessException {
+        final Class<?> serverClass = server.getClass();
+        final Field playersOnLimbo = serverClass.getDeclaredField("players");
+        playersOnLimbo.setAccessible(true);
+        final ConcurrentHashMap<UUID, ?> playersLimboMap = (ConcurrentHashMap<UUID, ?>) playersOnLimbo.get(server);
+        playersLimboMap.remove(player);
+        playersOnLimbo.set(server, playersLimboMap);
+
+        final Class<?> proxyClass = proxy.getClass();
+        System.out.println(proxyClass.getName());
+        System.out.println(proxyClass.getSuperclass().getName());
+        final Field proxiedPlayers = proxyClass.getDeclaredField("connectionsByUuid");
+        proxiedPlayers.setAccessible(true);
+        final ConcurrentHashMap<UUID, ?> proxiedPlayersMap = (ConcurrentHashMap<UUID, ?>) proxiedPlayers.get(proxy);
+        proxiedPlayersMap.remove(player);
+        proxiedPlayers.set(proxy, proxiedPlayersMap);
+    }
+
+}

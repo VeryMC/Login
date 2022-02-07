@@ -9,8 +9,9 @@ public class SchedulerUtil {
         return task;
     }
 
-    public void setTask(ScheduledTask task) {
+    public SchedulerUtil setTask(ScheduledTask task) {
         this.task = task;
+        return this;
     }
 
     public void cancel()

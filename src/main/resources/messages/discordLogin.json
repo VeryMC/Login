@@ -1,0 +1,35 @@
+{
+  "bold": true,
+  "color": "gold",
+  "extra": [
+    {
+      "bold": true,
+      "color": "white",
+      "text": "» "
+    },
+    {
+      "color": "yellow",
+      "text": "Cliquez "
+    },
+    {
+      "bold": true,
+      "color": "red",
+      "text": "ici",
+      "clickEvent": {
+        "action": "open_url",
+        "value": "%link%"
+      },
+      "hoverEvent": {
+        "action": "show_text",
+        "contents": {
+          "text": "§eOuvrez le lien suivant\n§eet connectez-vous"
+        }
+      }
+    },
+    {
+      "color": "yellow",
+      "text": " pour vous connecter."
+    }
+  ],
+  "text": "Login "
+}

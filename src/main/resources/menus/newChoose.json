@@ -2,19 +2,29 @@
   "title": {
     "fr": "§6§lÊtes-vous premium ?"
   },
-  "type": "GENERIC_9X3",
+  "type": "GENERIC_9X1",
   "reservedSlots": [],
   "placeholderItem": {
-    "itemType": "WHITE_STAINED_GLASS_PANE",
-    "displayName": {"fr": "§0"},
-    "lore": {"fr": []},
+    "itemType": "DIRT",
+    "displayName": {
+      "en": "§0",
+      "de": "§0"
+    },
+    "lore": {
+      "en": [],
+      "de": []
+    },
     "amount": 1,
-    "slots": [3, 4, 5, 12, 13, 14, 21, 22, 23]
+    "slots": [
+      0
+    ]
   },
   "items": [
     {
-      "itemType": "GREEN_STAINED_GLASS_PANE",
-      "displayName": {"fr": "§a§lOUI"},
+      "itemType": "GREEN_WOOL",
+      "displayName": {
+        "fr": "§a§lOUI"
+      },
       "lore": {
         "fr": [
           "§7Mon compte sera définit comme",
@@ -24,12 +34,18 @@
       },
       "amount": 1,
       "actionHandler": "choose",
-      "actionArguments": ["premium"],
-      "slots": [0, 1, 2, 9, 10, 11, 18, 19, 20]
+      "actionArguments": [
+        "premium"
+      ],
+      "slots": [
+        2
+      ]
     },
     {
-      "itemType": "RED_STAINED_GLASS_PANE",
-      "displayName": {"fr": "§c§lNON"},
+      "itemType": "RED_WOOL",
+      "displayName": {
+        "fr": "§c§lNON"
+      },
       "lore": {
         "fr": [
           "§7Mon compte sera définit comme",
@@ -39,8 +55,12 @@
       },
       "amount": 1,
       "actionHandler": "choose",
-      "actionArguments": ["cracked"],
-      "slots": [6, 7, 8, 15, 16, 17, 24, 25, 26]
+      "actionArguments": [
+        "cracked"
+      ],
+      "slots": [
+        6
+      ]
     }
   ]
 }

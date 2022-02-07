@@ -10,17 +10,21 @@ import com.velocitypowered.api.command.CommandManager;
 import com.velocitypowered.api.command.CommandMeta;
 import com.velocitypowered.api.command.CommandSource;
 import com.velocitypowered.api.proxy.Player;
-import com.velocitypowered.api.util.GameProfile;
+import com.velocitypowered.api.proxy.ProxyServer;
+import com.velocitypowered.api.proxy.server.RegisteredServer;
 import fr.verymc.api.wrapper.Wrapper;
 import fr.verymc.api.wrapper.users.login.LoginManager;
 import fr.verymc.api.wrapper.users.login.dto.PasswordCheckDto;
 import fr.verymc.api.wrapper.users.login.replies.PasswordCheckReply;
 import fr.verymc.login.ConfigurationManager;
+import fr.verymc.login.Login;
+import fr.verymc.login.ReflectManager;
 import net.kyori.adventure.text.Component;
-import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 
-import java.util.List;
+import java.lang.reflect.Field;
 import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static com.mojang.brigadier.arguments.StringArgumentType.getString;
 import static com.mojang.brigadier.arguments.StringArgumentType.greedyString;
@@ -29,8 +33,12 @@ public class LoginCommand {
 
     private final Wrapper http;
 
-    public LoginCommand(Wrapper http) {
+    private RegisteredServer lobby;
+
+    public LoginCommand(Wrapper http, ProxyServer proxyServer) {
         this.http = http;
+
+        if(proxyServer.getServer("lobby").isPresent()) this.lobby = proxyServer.getServer("lobby").get();
     }
 
     public static CommandMeta getCommandMeta(CommandManager cM) {
@@ -62,7 +70,7 @@ public class LoginCommand {
         final Player player = (Player) source;
 
         try {getString(context, "Mot de passe");} catch(IllegalArgumentException e) {
-            source.sendMessage(ConfigurationManager.getComponent("messages/errors", "missingPasswordArg.json"));
+            player.sendMessage(ConfigurationManager.getComponent("messages/errors", "missingPasswordArg.json"));
             return 0;
         }
         final String password = getString(context, "Mot de passe");
@@ -71,12 +79,24 @@ public class LoginCommand {
         final Optional<PasswordCheckReply> reply = loginManager.passwordCheck(new PasswordCheckDto(player.getUniqueId(), password));
 
         if(reply.isEmpty()) {
-            source.sendMessage(ConfigurationManager.getComponent("messages/errors", "unknownError.json"));
+            player.disconnect(ConfigurationManager.getComponent("messages/errors", "unknown.json"));
             return 0;
         }
 
         final PasswordCheckReply passwordCheckReply = reply.get();
+        if(!player.getUniqueId().equals(passwordCheckReply.getCrackUUID())) return 0;
 
-        return 0;
+        try {
+            final Player newPlayer = new ReflectManager().changeUUID(player, passwordCheckReply.getUUID());
+            newPlayer.createConnectionRequest(this.lobby).connect();
+
+            Login.tasks.get(passwordCheckReply.getCrackUUID()).cancel();
+            Login.tasks.remove(passwordCheckReply.getCrackUUID());
+
+            return 0;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            player.disconnect(ConfigurationManager.getComponent("messages/errors", "unknown.json"));
+            return 0;
+        }
     }
 }

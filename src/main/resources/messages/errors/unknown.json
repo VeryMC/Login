@@ -1,0 +1,18 @@
+{
+  "extra": [
+    {
+      "bold": true,
+      "color": "gold",
+      "text": "Login \n"
+    },
+    {
+      "bold": true,
+      "color": "white",
+      "text": "» "
+    },
+    {
+      "text": "§cErreur inconnue"
+    }
+  ],
+  "text": ""
+}
