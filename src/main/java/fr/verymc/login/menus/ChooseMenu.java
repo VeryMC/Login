@@ -5,6 +5,7 @@ import com.velocitypowered.api.proxy.ProxyServer;
 import dev.simplix.cirrus.common.Cirrus;
 import dev.simplix.cirrus.common.business.PlayerWrapper;
 import dev.simplix.cirrus.common.configuration.MenuConfiguration;
+import dev.simplix.cirrus.common.converter.Converters;
 import dev.simplix.cirrus.common.menus.SimpleMenu;
 import fr.verymc.api.wrapper.Wrapper;
 import fr.verymc.api.wrapper.users.login.dto.PremiumRegisterDto;
@@ -24,17 +25,17 @@ public class ChooseMenu extends SimpleMenu {
         registerActionHandler("choose", click -> {
             switch (click.arguments().get(0)) {
                 case "premium" -> {
+                    player().closeInventory();
+
                     if(proxyServer.getPlayer(player().uniqueId()).isEmpty()) return;
                     final Player proxiedPlayer = proxyServer.getPlayer(player().uniqueId()).get();
-
-                    player().closeInventory();
 
                     final Wrapper http = new Wrapper("https://api.verymc.fr");
                     http.getUsersManager().getLoginManager().registerPremium(new PremiumRegisterDto(player().name()));
 
                     proxiedPlayer.disconnect(ConfigurationManager.getComponent("messages", "premiumKick.json"));
                 }
-                case "cracked" -> new ChooseMenu(player, Cirrus.configurationFactory().loadFile("plugins/login/menus/method.json"), proxyServer, plugin).open();
+                case "cracked" -> new MethodMenu(player, Cirrus.configurationFactory().loadFile("plugins/login/menus/method.json"), proxyServer, plugin).open();
             }
         });
     }

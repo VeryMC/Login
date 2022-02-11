@@ -25,8 +25,6 @@ public class ConfigurationManager {
 
         //Messages
         PATHS.put("messages", this.createDir(PATHS.get("/").resolve("messages")));
-        this.copy("messages/choose.json", PATHS.get("messages").resolve("choose.json"));
-        this.copy("messages/method.json", PATHS.get("messages").resolve("oldmethod.json"));
         this.copy("messages/discordLogin.json", PATHS.get("messages").resolve("discordLogin.json"));
         this.copy("messages/passwordLogin.json", PATHS.get("messages").resolve("passwordLogin.json"));
         this.copy("messages/premiumKick.json", PATHS.get("messages").resolve("premiumKick.json"));
